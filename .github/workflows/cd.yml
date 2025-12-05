@@ -12,5 +12,5 @@ jobs:
       run: echo "${{ github.token }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Build and push
       run: |
-        docker build -t ghcr.io/${{ github.repository_owner }}/python-app:latest app
+        docker build -t ghcr.io/${{ github.repository_owner }}/python-app:latest .
         docker push ghcr.io/${{ github.repository_owner }}/python-app:latest
