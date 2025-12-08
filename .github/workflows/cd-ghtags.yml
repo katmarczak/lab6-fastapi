@@ -1,0 +1,29 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  docker-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Login to GHCR
+      run: echo "${{ github.token }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build and push image
+      run: |
+        IMAGE="ghcr.io/${{ github.repository_owner }}/python-app"
+
+        VERSION="${{ github.ref_name }}"
+
+        docker build -t $IMAGE:$VERSION .
+
+        docker tag $IMAGE:$VERSION $IMAGE:latest
+
+        docker push $IMAGE:$VERSION
+        docker push $IMAGE:latest
