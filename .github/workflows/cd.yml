@@ -1,4 +1,4 @@
-name: CD
+name: CD to GCHR
 on: workflow_dispatch
 
 jobs:
