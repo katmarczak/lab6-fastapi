@@ -1,7 +1,5 @@
 name: CD-to-DockerHub
-on:
-  push:
-    branches: [ main ]
+on: workflow_dispatch
 
 jobs:
   docker-deploy:
